@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xyl.Dao.inter.ICartDao">
+
+
+    <!-- 通过用户uid获取所有购物车信息-->
+    <select id="queryCartByUid" resultType="Cart" parameterType="int">
+    select * from cart where uid = (#{uid})
+    </select>
+
+    <!--通过用户uid和书本bid获取所有购物车信息-->
+    <select id="queryCartByUidAndBid" resultType="Cart" >
+        select * from cart where uid = (#{0}) and bid = (#{1})
+    </select>
+
+    <!--更新cart表中对应用户对应购书数-->
+    <update id="updateCartCountByUidAndBid" >
+        update cart SET counts=counts+1,totalprice=price*counts WHERE uid=#{0} and bid = #{1}
+    </update>
+    <!-- 插入一条记录 -->
+    <insert id="insertCart">
+        insert into cart (uid,price,totalprice,counts,bid,title,face) values (#{0},#{1},#{2},#{3},#{4},#{5},#{6})
+
+    </insert>
+    <!--通过uid删除记录-->
+    <delete id="deleteCartByUid" parameterType="int">
+        DELETE from cart WHERE uid = #{uid}
+    </delete>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xyl.Dao.inter.IUserDao">
+
+    <!-- 查询所有用户 -->
+    <select id="queryAll" resultType="User" >
+    select * from user
+</select>
+    <select id="queryByName" parameterType="String" resultType="User" >
+        select * from user where username = (#{name})
+    </select>
+
+    <!-- 插入一条记录 -->
+    <insert id="addUser" parameterType="User">
+        insert into user(username,password,email) values(#{username},#{password},#{email})
+    </insert>
+
+</mapper>
